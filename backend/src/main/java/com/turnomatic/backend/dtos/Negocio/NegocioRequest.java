@@ -1,4 +1,4 @@
-package com.turnomatic.backend.dtos;
+package com.turnomatic.backend.dtos.Negocio;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

@@ -1,4 +1,4 @@
-package com.turnomatic.backend.model;
+package com.turnomatic.backend.model.Negocio;
 
 import java.time.OffsetDateTime;
 

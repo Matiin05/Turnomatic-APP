@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import com.turnomatic.backend.exception.Negocio.NegocioDuplicateException;
+import com.turnomatic.backend.exception.Negocio.NegocioNotFoundException;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

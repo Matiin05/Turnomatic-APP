@@ -1,10 +1,10 @@
-package com.turnomatic.backend.service;
+package com.turnomatic.backend.service.Negocio;
 
 import java.util.Set;
 
-import com.turnomatic.backend.dtos.NegocioRequest;
-import com.turnomatic.backend.dtos.NegocioResponse;
-import com.turnomatic.backend.model.Negocio;
+import com.turnomatic.backend.dtos.Negocio.NegocioRequest;
+import com.turnomatic.backend.dtos.Negocio.NegocioResponse;
+import com.turnomatic.backend.model.Negocio.Negocio;
 
 public interface NegocioService {
 

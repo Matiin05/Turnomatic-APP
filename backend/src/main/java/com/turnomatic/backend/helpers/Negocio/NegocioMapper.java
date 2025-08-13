@@ -1,4 +1,4 @@
-package com.turnomatic.backend.helpers;
+package com.turnomatic.backend.helpers.Negocio;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.turnomatic.backend.dtos.NegocioRequest;
-import com.turnomatic.backend.dtos.NegocioResponse;
-import com.turnomatic.backend.model.Negocio;
+import com.turnomatic.backend.dtos.Negocio.NegocioRequest;
+import com.turnomatic.backend.dtos.Negocio.NegocioResponse;
+import com.turnomatic.backend.model.Negocio.Negocio;
 
 @Component
 public class NegocioMapper {

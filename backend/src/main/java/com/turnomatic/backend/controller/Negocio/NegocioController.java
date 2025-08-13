@@ -1,4 +1,4 @@
-package com.turnomatic.backend.controller;
+package com.turnomatic.backend.controller.Negocio;
 
 import java.net.URI;
 import java.util.LinkedHashSet;
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.turnomatic.backend.dtos.NegocioRequest;
-import com.turnomatic.backend.dtos.NegocioResponse;
-import com.turnomatic.backend.helpers.NegocioMapper;
-import com.turnomatic.backend.model.Negocio;
-import com.turnomatic.backend.service.NegocioService;
+import com.turnomatic.backend.dtos.Negocio.NegocioRequest;
+import com.turnomatic.backend.dtos.Negocio.NegocioResponse;
+import com.turnomatic.backend.helpers.Negocio.NegocioMapper;
+import com.turnomatic.backend.model.Negocio.Negocio;
+import com.turnomatic.backend.service.Negocio.NegocioService;
 
 import lombok.RequiredArgsConstructor;
 

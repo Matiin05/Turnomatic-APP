@@ -1,4 +1,4 @@
-package com.turnomatic.backend.exception;
+package com.turnomatic.backend.exception.Negocio;
 
 public class NegocioDuplicateException extends RuntimeException {
     

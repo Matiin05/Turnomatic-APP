@@ -1,4 +1,4 @@
-package com.turnomatic.backend.service;
+package com.turnomatic.backend.service.Negocio;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -6,14 +6,14 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.turnomatic.backend.dtos.NegocioRequest;
-import com.turnomatic.backend.dtos.NegocioResponse;
+import com.turnomatic.backend.dtos.Negocio.NegocioRequest;
+import com.turnomatic.backend.dtos.Negocio.NegocioResponse;
 import com.turnomatic.backend.exception.BusinessLogicException;
-import com.turnomatic.backend.exception.NegocioDuplicateException;
-import com.turnomatic.backend.exception.NegocioNotFoundException;
-import com.turnomatic.backend.helpers.NegocioMapper;
-import com.turnomatic.backend.model.Negocio;
-import com.turnomatic.backend.repository.NegocioRepository;
+import com.turnomatic.backend.exception.Negocio.NegocioDuplicateException;
+import com.turnomatic.backend.exception.Negocio.NegocioNotFoundException;
+import com.turnomatic.backend.helpers.Negocio.NegocioMapper;
+import com.turnomatic.backend.model.Negocio.Negocio;
+import com.turnomatic.backend.repository.Negocio.NegocioRepository;
 
 import lombok.RequiredArgsConstructor;
 

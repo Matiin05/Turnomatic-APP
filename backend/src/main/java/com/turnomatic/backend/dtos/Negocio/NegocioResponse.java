@@ -1,4 +1,4 @@
-package com.turnomatic.backend.dtos;
+package com.turnomatic.backend.dtos.Negocio;
 
 import lombok.Data;
 
