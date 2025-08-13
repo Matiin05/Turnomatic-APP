@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.turnomatic.backend.dtos.NegocioRequest;
 import com.turnomatic.backend.dtos.NegocioResponse;
+import com.turnomatic.backend.exception.BusinessLogicException;
+import com.turnomatic.backend.exception.NegocioDuplicateException;
+import com.turnomatic.backend.exception.NegocioNotFoundException;
 import com.turnomatic.backend.helpers.NegocioMapper;
 import com.turnomatic.backend.model.Negocio;
 import com.turnomatic.backend.repository.NegocioRepository;
@@ -24,7 +27,7 @@ public class NegocioServiceImpl implements NegocioService {
     @Transactional
     public NegocioResponse crearNegocio(NegocioRequest negocio) {
         if (negocioRepository.existsByNombre(negocio.getNombre())) {
-            throw new IllegalArgumentException("Ya hay un negocio registrado con este nombre");
+            throw new NegocioDuplicateException(negocio.getNombre(), "nombre");
         }
 
         Negocio entity = negocioMapper.mapToEntity(negocio); // request -> negocio
@@ -37,13 +40,13 @@ public class NegocioServiceImpl implements NegocioService {
     public NegocioResponse actualizarNegocio(Long negocioId, NegocioRequest negocio) {
         // 1) Traer existente
         Negocio existente = negocioRepository.findById(negocioId)
-                .orElseThrow(() -> new IllegalArgumentException("Negocio no encontrado"));
+                .orElseThrow(() -> new NegocioNotFoundException(negocioId));
 
         // 2) Validar duplicado si cambia el nombre
         if (negocio.getNombre() != null
                 && !negocio.getNombre().equalsIgnoreCase(existente.getNombre())
                 && negocioRepository.existsByNombre(negocio.getNombre())) {
-            throw new IllegalArgumentException("Ya hay un negocio registrado con este nombre");
+            throw new NegocioDuplicateException(negocio.getNombre(), "nombre");
         }
 
         negocioMapper.updateEntity(negocio, existente);
@@ -55,13 +58,12 @@ public class NegocioServiceImpl implements NegocioService {
     @Transactional
     public void borrarNegocio(Long negocioId) {
         Negocio existente = negocioRepository.findById(negocioId)
-                .orElseThrow(() -> new IllegalArgumentException("Negocio no encontrado"));
+                .orElseThrow(() -> new NegocioNotFoundException(negocioId));
 
         try {
             negocioRepository.delete(existente);
         } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            throw new IllegalStateException(
-                    "No se puede borrar el negocio");
+            throw new BusinessLogicException("borrar el negocio", "tiene datos relacionados");
         }
     }
 
@@ -75,7 +77,7 @@ public class NegocioServiceImpl implements NegocioService {
     @Transactional (readOnly = true)
     public NegocioResponse findById(Long negocioId) {
         Negocio negocio = negocioRepository.findById(negocioId)
-        .orElseThrow(() -> new IllegalArgumentException("Negocio no encontrado"));
+        .orElseThrow(() -> new NegocioNotFoundException(negocioId));
 
         return negocioMapper.mapToResponse(negocio);
     }

@@ -6,8 +6,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/negocios")
 @RequiredArgsConstructor
+@Validated
 public class NegocioController {
 
     private final NegocioService negocioService;
@@ -51,7 +54,7 @@ public class NegocioController {
       // Actualizar negocio : PUT /api/v1/negocios/{id}
     @PutMapping("/{id}")
     public ResponseEntity<NegocioResponse> actualizar(
-            @PathVariable("id") Long id,
+            @PathVariable("id") @Min(value = 1, message = "El ID debe ser mayor a 0") Long id,
             @Valid @RequestBody NegocioRequest request) {
 
         NegocioResponse actualizado = negocioService.actualizarNegocio(id, request);
@@ -60,7 +63,7 @@ public class NegocioController {
 
     // Borrar negocio : DELETE /api/v1/negocios/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> borrar(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> borrar(@PathVariable("id") @Min(value = 1, message = "El ID debe ser mayor a 0") Long id) {
         negocioService.borrarNegocio(id);
         return ResponseEntity.noContent().build();
     }
@@ -77,7 +80,7 @@ public class NegocioController {
  
      // Obtener info de un negocio: GET /api/v1/negocios/{id}
      @GetMapping("/{id}")
-     public ResponseEntity<NegocioResponse> obtenerPorId(@PathVariable("id") Long id) {
+     public ResponseEntity<NegocioResponse> obtenerPorId(@PathVariable("id") @Min(value = 1, message = "El ID debe ser mayor a 0") Long id) {
          NegocioResponse dto = negocioService.findById(id);
          return ResponseEntity.ok(dto);
      }
