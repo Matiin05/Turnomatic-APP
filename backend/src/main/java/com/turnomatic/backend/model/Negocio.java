@@ -1,5 +1,7 @@
 package com.turnomatic.backend.model;
 
+import java.security.Timestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,4 +26,9 @@ public class Negocio {
 
     @Column(name = "logo", nullable = false)
     private String logo;
+
+    @Column(updatable = false)
+    private Timestamp createdAt;
+
+    private Timestamp updatedAt;
 }
