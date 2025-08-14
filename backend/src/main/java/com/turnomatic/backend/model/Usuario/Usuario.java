@@ -7,10 +7,13 @@ import com.turnomatic.backend.model.Sucursal.Sucursal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -42,6 +45,12 @@ public class Usuario {
     private String password;
     // Authorities (Los roles que tiene el usuario)
 
+    @ManyToMany(fetch = FetchType.EAGER) // EAGER porque casi siempre necesitarás los roles al autenticar
+    @JoinTable(
+        name = "usuario_roles",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "rol_id")
+    )
     private Set<Rol> roles;
 
     // Datos del usuario (Los usuarios son o admin o trabajadores, ambos dos
