@@ -13,7 +13,7 @@ import com.turnomatic.backend.dtos.Autenticacion.LoginResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
