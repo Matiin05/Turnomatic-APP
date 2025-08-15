@@ -1,6 +1,11 @@
 package com.turnomatic.backend.model.Usuario;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.turnomatic.backend.model.Negocio.Negocio;
 import com.turnomatic.backend.model.Sucursal.Sucursal;
@@ -31,7 +36,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,11 +51,7 @@ public class Usuario {
     // Authorities (Los roles que tiene el usuario)
 
     @ManyToMany(fetch = FetchType.EAGER) // EAGER porque casi siempre necesitarás los roles al autenticar
-    @JoinTable(
-        name = "usuario_roles",
-        joinColumns = @JoinColumn(name = "usuario_id"),
-        inverseJoinColumns = @JoinColumn(name = "rol_id")
-    )
+    @JoinTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles;
 
     // Datos del usuario (Los usuarios son o admin o trabajadores, ambos dos
@@ -74,5 +75,15 @@ public class Usuario {
     @JoinColumn(name = "sucursal_id", nullable = false)
     @NotNull
     private Sucursal sucursal;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
 
 }
