@@ -1,8 +1,8 @@
 package com.turnomatic.backend.dtos.Usuario;
 
-import java.util.Set;
-
 import lombok.Data;
+
+import java.util.Set;
 
 @Data
 public class UsuarioResponse {
@@ -12,11 +12,7 @@ public class UsuarioResponse {
     private Set<String> roles;
     private String nombre;
     private String apellido;
-
     private Long negocioId;
     private Long sucursalId;
-
-    //private NegocioResponse negocio;
-    //private SucursalResponse sucursal;
 }
 

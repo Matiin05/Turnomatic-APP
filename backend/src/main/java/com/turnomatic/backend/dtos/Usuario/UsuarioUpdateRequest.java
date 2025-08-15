@@ -6,13 +6,12 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class UsuarioRequest {
+public class UsuarioUpdateRequest {
 
     @Email
     @NotBlank
     private String email;
 
-    @NotBlank
     private String password;
 
     @Size(min = 3)
