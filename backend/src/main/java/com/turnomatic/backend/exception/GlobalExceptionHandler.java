@@ -12,6 +12,8 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.turnomatic.backend.exception.Negocio.NegocioDuplicateException;
 import com.turnomatic.backend.exception.Negocio.NegocioNotFoundException;
+import com.turnomatic.backend.exception.Usuario.UsuarioDuplicateException;
+import com.turnomatic.backend.exception.Usuario.UsuarioNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -33,6 +35,34 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NegocioDuplicateException.class)
     public ResponseEntity<ErrorResponse> handleNegocioDuplicate(
             NegocioDuplicateException ex, WebRequest request) {
+        
+        ErrorResponse error = new ErrorResponse(
+            ex.getMessage(),
+            "CONFLICT",
+            HttpStatus.CONFLICT.value(),
+            request.getDescription(false)
+        );
+        
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+    
+    @ExceptionHandler(UsuarioNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUsuarioNotFound(
+            UsuarioNotFoundException ex, WebRequest request) {
+        
+        ErrorResponse error = new ErrorResponse(
+            ex.getMessage(),
+            "NOT_FOUND",
+            HttpStatus.NOT_FOUND.value(),
+            request.getDescription(false)
+        );
+        
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler(UsuarioDuplicateException.class)
+    public ResponseEntity<ErrorResponse> handleUsuarioDuplicate(
+            UsuarioDuplicateException ex, WebRequest request) {
         
         ErrorResponse error = new ErrorResponse(
             ex.getMessage(),
