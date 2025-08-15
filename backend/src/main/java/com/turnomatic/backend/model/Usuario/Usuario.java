@@ -78,7 +78,10 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        // Convertir los roles a GrantedAuthority
+        return roles.stream()
+                .map(rol -> new org.springframework.security.core.authority.SimpleGrantedAuthority(rol.getNombre()))
+                .collect(java.util.stream.Collectors.toList());
     }
 
     @Override
@@ -86,4 +89,23 @@ public class Usuario implements UserDetails {
         return this.email;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
